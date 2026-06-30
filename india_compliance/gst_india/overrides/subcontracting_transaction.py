@@ -126,7 +126,7 @@ def set_address_for_subcontracting_inward(doc):
     if not doc.bill_from_address:
         doc.bill_from_address = get_default_address("Company", doc.company)
 
-    if not doc.bill_to_address:
+    if not doc.bill_to_address or doc.has_value_changed("subcontracting_inward_order"):
         customer = frappe.db.get_value(
             "Subcontracting Inward Order", doc.subcontracting_inward_order, "customer"
         )
